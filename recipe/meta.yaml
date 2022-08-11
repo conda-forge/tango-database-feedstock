@@ -1,5 +1,5 @@
 {% set name = "tango-database" %}
-{% set version = "5.17" %}
+{% set version = "5.18" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/archive/Database-Release-{{ version }}/TangoDatabase-Database-Release-{{ version }}.tar.gz
-  sha256: c1b744ed82b668b4218d8ac9504ab7061692f1a8af7380a914eb8029bde1eac4
+  sha256: fcf15cce8802dd9ebef5d9e7c834021a5d4b6195123de15a77a3a4c7fe6a675a
 
 build:
   number: 0
