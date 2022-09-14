@@ -1,5 +1,5 @@
 {% set name = "tango-database" %}
-{% set version = "5.18" %}
+{% set version = "5.19" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/archive/Database-Release-{{ version }}/TangoDatabase-Database-Release-{{ version }}.tar.gz
-  sha256: fcf15cce8802dd9ebef5d9e7c834021a5d4b6195123de15a77a3a4c7fe6a675a
+  sha256: a3c816dd01461d3f1f7887312c44b0615a68d46f4e890504d58f048fb9f5a45e
 
 build:
   number: 0
@@ -23,6 +23,7 @@ requirements:
   host:
     - cppzmq
     - cpptango
+    - mysql-client
     - mysql-devel
     - omniorb
 
