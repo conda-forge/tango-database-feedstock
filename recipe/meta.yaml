@@ -23,7 +23,6 @@ requirements:
   host:
     - cppzmq
     - cpptango
-    - mysql-client
     - mysql-devel
     - omniorb
 
