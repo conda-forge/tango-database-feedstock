@@ -10,8 +10,8 @@ source:
   sha256: beb0c79f9db361e5c49ae30f2601e27eb79b89500c088e29dc2328de88bd2c3d
 
 build:
-  number: 0
-  skip: true  # [not linux]
+  number: 1
+  skip: true  # [win]
 
 requirements:
   build:
@@ -25,6 +25,7 @@ requirements:
     - cpptango
     - mysql-devel
     - omniorb
+    - omniorb-libs
 
 test:
   commands:
