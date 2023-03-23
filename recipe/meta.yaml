@@ -1,5 +1,5 @@
 {% set name = "tango-database" %}
-{% set version = "5.20" %}
+{% set version = "5.21" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/archive/Database-Release-{{ version }}/TangoDatabase-Database-Release-{{ version }}.tar.gz
-  sha256: beb0c79f9db361e5c49ae30f2601e27eb79b89500c088e29dc2328de88bd2c3d
+  sha256: 0829a97a17dc8166e0e1c59ea86e7769e9e92642982b167d10868e94c263fe9d
   patches:
     - remove-db-client-compile-check.patch  # [build_platform != target_platform]
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
 
 requirements:
