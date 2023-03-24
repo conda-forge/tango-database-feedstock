@@ -1,0 +1,34 @@
+diff --git a/configure/FindMySQL.cmake b/configure/FindMySQL.cmake
+index eab1542..cabae82 100644
+--- a/configure/FindMySQL.cmake
++++ b/configure/FindMySQL.cmake
+@@ -141,29 +141,6 @@ if (NOT MySQL_INCLUDE_DIR)
+     set(MySQL_VERSION MySQL_VERSION-NOTFOUND)
+ endif()
+ 
+-if(NOT DEFINED MySQL_VERSION)
+-    try_run(
+-        DB_CLIENT_RUN
+-        DB_CLIENT_COMPILE
+-        ${CMAKE_CURRENT_BINARY_DIR}
+-        ${CMAKE_CURRENT_LIST_DIR}/test_db_client.cpp
+-        COMPILE_DEFINITIONS "-I \"${MySQL_INCLUDE_DIR}\""
+-        LINK_LIBRARIES "${MySQL_LIBRARY}"
+-        COMPILE_OUTPUT_VARIABLE DB_CLIENT_COMPILE_OUTPUT
+-        RUN_OUTPUT_VARIABLE DB_CLIENT_VERSION)
+-
+-    if (NOT DB_CLIENT_COMPILE)
+-      message(FATAL_ERROR "Failed to compile simple database client program:\n${DB_CLIENT_COMPILE_OUTPUT}")
+-    endif()
+-
+-    if (NOT DB_CLIENT_RUN EQUAL 0)
+-      message(FATAL_ERROR "Failed to run simple database client program:\n${DB_CLIENT_VERSION}")
+-    endif()
+-
+-    string(STRIP "${DB_CLIENT_VERSION}" DB_CLIENT_VERSION)
+-    set(MySQL_VERSION ${DB_CLIENT_VERSION} CACHE INTERNAL "database client library version")
+-endif()
+-
+ include(FindPackageHandleStandardArgs)
+ find_package_handle_standard_args(MySQL
+     FOUND_VAR MySQL_FOUND
