@@ -8,8 +8,6 @@ package:
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/archive/Database-Release-{{ version }}/TangoDatabase-Database-Release-{{ version }}.tar.gz
   sha256: 0829a97a17dc8166e0e1c59ea86e7769e9e92642982b167d10868e94c263fe9d
-  patches:
-    - remove-db-client-compile-check.patch  # [build_platform != target_platform]
 
 build:
   number: 0
