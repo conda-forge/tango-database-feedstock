@@ -1,7 +1,7 @@
 if [[ "$host_alias" != "$build_alias" ]]
 then
   # We cannot use try_run when cross compiling
-  ADDITIONAL_ARGS="-DDB_CLIENT_RUN=0"
+  ADDITIONAL_ARGS="-DMySQL_VERSION=unknown"
 else
   ADDITIONAL_ARGS=""
 fi
