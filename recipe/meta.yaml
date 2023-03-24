@@ -11,15 +11,14 @@ source:
 
 build:
   number: 0
-  skip: true  # [win]
 
 requirements:
   build:
     - cmake
-    - make
+    - make                    # [unix]
     - {{ compiler('cxx') }}
-    - libtool
-    - pkg-config
+    - libtool                 # [unix]
+    - pkg-config              # [unix]
   host:
     - cppzmq
     - cpptango
@@ -30,10 +29,11 @@ requirements:
 test:
   commands:
     # Databaseds --help returns 255, so grep the stderr for test
-    - Databaseds --help 2>&1 | grep usage
-    - test -f $PREFIX/share/tango/db/create_db.sql
-    - test -f $PREFIX/share/tango/db/create_db_tables.sql
-    - test -f $PREFIX/share/tango/db/stored_proc.sql
+    - Databaseds --help 2>&1 | grep usage                  # [unix]
+    - test -f $PREFIX/share/tango/db/create_db.sql         # [unix]
+    - test -f $PREFIX/share/tango/db/create_db_tables.sql  # [unix]
+    - test -f $PREFIX/share/tango/db/stored_proc.sql       # [unix]
+    - Databaseds.exe --help 2>&1 | findstr usage           # [win]
 
 about:
   home: https://www.tango-controls.org
