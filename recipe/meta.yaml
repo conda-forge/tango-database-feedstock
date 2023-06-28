@@ -1,5 +1,5 @@
 {% set name = "tango-database" %}
-{% set version = "5.21" %}
+{% set version = "5.22" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/archive/Database-Release-{{ version }}/TangoDatabase-Database-Release-{{ version }}.tar.gz
-  sha256: 0829a97a17dc8166e0e1c59ea86e7769e9e92642982b167d10868e94c263fe9d
+  sha256: 9edd06a62033d404a41f9cd88f216ce938b859df9e165b536b5e82eeae2a38c0
   patches:
     - find-zeromq-win.patch  # [win]
 
