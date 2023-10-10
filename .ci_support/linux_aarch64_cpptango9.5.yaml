@@ -9,12 +9,12 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cpptango:
-- '9.4'
+- '9.5'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
 - '12'
 docker_image:
-- quay.io/condaforge/linux-anvil-aarch64
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 target_platform:
 - linux-aarch64
