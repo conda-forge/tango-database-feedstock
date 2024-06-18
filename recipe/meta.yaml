@@ -1,5 +1,5 @@
 {% set name = "tango-database" %}
-{% set version = "5.22" %}
+{% set version = "5.23" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +7,19 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/archive/Database-Release-{{ version }}/TangoDatabase-Database-Release-{{ version }}.tar.gz
-  sha256: 9edd06a62033d404a41f9cd88f216ce938b859df9e165b536b5e82eeae2a38c0
+  sha256: bb0228358e0e1cc899fb5d1c3e50ca0462444bcc176e97e7410e34874c6f3fa7
   patches:
     - find-zeromq-win.patch  # [win]
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
     - cmake
     - make                    # [unix]
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - libtool                 # [unix]
     - pkg-config              # [unix]
   host:
