@@ -1,3 +1,5 @@
+c_stdlib:
+- vs
 channel_sources:
 - conda-forge
 channel_targets:
@@ -6,7 +8,5 @@ cpptango:
 - '9.4'
 cxx_compiler:
 - vs2019
-mysql_devel:
-- '8.3'
 target_platform:
 - win-64
