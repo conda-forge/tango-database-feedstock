@@ -1,5 +1,5 @@
 {% set name = "tango-database" %}
-{% set version = "5.22" %}
+{% set version = "5.20" %}
 
 package:
   name: {{ name|lower }}
@@ -7,17 +7,20 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/archive/Database-Release-{{ version }}/TangoDatabase-Database-Release-{{ version }}.tar.gz
-  sha256: 9edd06a62033d404a41f9cd88f216ce938b859df9e165b536b5e82eeae2a38c0
+  sha256: beb0c79f9db361e5c49ae30f2601e27eb79b89500c088e29dc2328de88bd2c3d
+  patches:
+    - find-mysql.patch
 
 build:
   number: 2
+  skip: true  # [win]
 
 requirements:
   build:
     - cmake
     - make                    # [unix]
     - {{ compiler('cxx') }}
-    - libtool                 # [unix]
+    - {{ stdlib("c") }}
     - pkg-config              # [unix]
   host:
     - cppzmq

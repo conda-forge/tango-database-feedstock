@@ -1,0 +1,315 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c6bbd8d..af7c631 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,11 +28,11 @@ set(SOURCES DataBase.cpp
+ set(ADDITIONAL_SOURCES  DataBaseUtils.cpp
+                         update_starter.cpp)
+ 
+-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${TANGO_PKG_INCLUDE_DIRS} ${MYSQL_INCLUDE_DIRS})
++include_directories(${CMAKE_CURRENT_BINARY_DIR} ${TANGO_PKG_INCLUDE_DIRS} ${MySQL_INCLUDE_DIR})
+ link_directories(${TANGO_PKG_LIBRARY_DIRS})
+ 
+ add_executable(Databaseds ${SOURCES} ${ADDITIONAL_SOURCES})
+-target_link_libraries(Databaseds ${TANGO_PKG_LIBRARIES} ${MYSQL_LIBRARIES})
++target_link_libraries(Databaseds ${TANGO_PKG_LIBRARIES} ${MySQL_LIBRARY})
+ target_compile_options(Databaseds PUBLIC ${TANGO_PKG_CFLAGS_OTHER} -Wall -Wextra -D_FORTIFY_SOURCE=2 -O1)
+ 
+ message("Compiler: ${CMAKE_CXX_COMPILER_ID}")
+diff --git a/configure/FindMySQL.cmake b/configure/FindMySQL.cmake
+index 7896ed7..e4c2b05 100644
+--- a/configure/FindMySQL.cmake
++++ b/configure/FindMySQL.cmake
+@@ -1,74 +1,230 @@
+-# - Try to find MySQL.
+-# Once done this will define:
+-# MYSQL_FOUND			- If false, do not try to use MySQL.
+-# MYSQL_INCLUDE_DIRS	- Where to find mysql.h, etc.
+-# MYSQL_LIBRARIES		- The libraries to link against.
+-#
+-
+-if( WIN32 )
+-    find_path( MYSQL_INCLUDE_DIR
+-            NAMES "mysql.h"
+-            PATHS "$ENV{PROGRAMFILES}/MySQL/*/include"
+-            "$ENV{PROGRAMFILES(x86)}/MySQL/*/include"
+-            "$ENV{SYSTEMDRIVE}/MySQL/*/include" )
+-
+-    find_library( MYSQL_LIBRARY
+-            NAMES "mysqlclient" "mysqlclient_r"
+-            PATHS "$ENV{PROGRAMFILES}/MySQL/*/lib"
+-            "$ENV{PROGRAMFILES(x86)}/MySQL/*/lib"
+-            "$ENV{SYSTEMDRIVE}/MySQL/*/lib" )
++#[=======================================================================[.rst:
++FindMySQL
++---------
++
++Find MySQL library
++
++Imported Targets
++^^^^^^^^^^^^^^^^
++
++This module provides the following imported targets, if found:
++
++    ``MySQL::MySQL``
++    The MySQL client library
++    ``MySQL::exe``
++    The MySQL client executable
++
++Result Variables
++^^^^^^^^^^^^^^^^
++
++This will define the following variables:
++
++    ``MySQL_FOUND``
++    True if the system has the MySQL library.
++    ``MySQL_exe_FOUND``
++    True if the system has the MySQL library.
++    ``MySQL_VERSION``
++    The version of the MySQL library which was found, if known
++
++Cache Variables
++^^^^^^^^^^^^^^^
++
++The following cache variables may also be set:
++
++    ``MySQL_INCLUDE_DIR``
++    The directory containing ``mysql.h``.
++    ``MySQL_LIBRARY_RELEASE``
++    The path to the release MySQL library.
++    ``MySQL_LIBRARY_DEBUG``
++    The path to the debug MySQL library.
++    ``MySQL_LIBRARY``
++    The path to the release MySQL library or the debug library
++    if the release library is not found.
++    ``MySQL_EXECUTABLE``
++    The path to the mysql client program
++
++#]=======================================================================]
++
++if (NOT DEFINED PKG_CONFIG_FOUND)
++    find_package(PkgConfig QUIET)
++endif()
++
++# Collect hints from pkg-config
++if (PKG_CONFIG_FOUND)
++    pkg_search_module(_MySQL_PKG mysql mariadb QUIET)
++endif()
++
++if (WIN32)
++    set(_mysql_inc_paths
++        "$ENV{ProgramFiles}/MySQL/*/include"
++        "$ENV{ProgramFiles\(x86\)}/MySQL/*/include"
++        "$ENV{ProgramFiles}/MariaDB/*/include"
++        "$ENV{ProgramFiles\(x86\)}/MariaDB/*/include"
++        "$ENV{ProgramFiles}/MariaDB/include"
++        "$ENV{ProgramFiles\(x86\)}/MariaDB/include"
++        )
++endif()
++
++find_path(MySQL_INCLUDE_DIR
++    NAMES "mysql.h"
++    PATHS
++        ${_mysql_inc_paths}
++        "${_MySQL_PKG_INCLUDE_DIRS}"
++    PATH_SUFFIXES mysql mariadb
++    )
++unset(_mysql_inc_paths)
++
++if (WIN32)
++    set(_mysql_release_names libmariadb libmysql)
++    set(_mysql_debug_names  libmariadbd libmysqld)
++    set(_mysql_lib_paths
++        "$ENV{ProgramFiles}/MySQL/*/lib"
++        "$ENV{ProgramFiles\(x86\)}/MySQL/*/lib"
++        "$ENV{ProgramFiles}/MariaDB/*/lib"
++        "$ENV{ProgramFiles\(x86\)}/MariaDB/*/lib"
++        "$ENV{ProgramFiles}/MariaDB/lib"
++        "$ENV{ProgramFiles\(x86\)}/MariaDB/lib"
++        )
+ else()
+-    find_path( MYSQL_INCLUDE_DIR
+-            NAMES "mysql.h"
+-            PATHS "/usr/include/mysql"
+-            "/usr/include/mariadb"
+-            "/usr/local/include/mysql"
+-            "/usr/mysql/include/mysql" )
+-
+-    find_library( MYSQL_LIBRARY
+-            NAMES "mysqlclient" "mysqlclient_r" "mariadbclient"
+-            PATHS "/lib/mysql"
+-            "/lib64/mysql"
+-            "/usr/lib/mysql"
+-            "/usr/lib/mariadb"
+-            "/usr/lib64/mysql"
+-            "/usr/local/lib/mysql"
+-            "/usr/local/lib64/mysql"
+-            "/usr/mysql/lib/mysql"
+-            "/usr/mysql/lib64/mysql" )
++    set(_mysql_release_names  mariadb mysqlclient mysqlclient_r)
++    set(_mysql_debug_names  mariadb mysqlclient mysqlclient_r)
+ endif()
+ 
+-if(NOT DEFINED DB_CLIENT_COMPILE)
+-  try_run(DB_CLIENT_COMPILE
+-          DB_CLIENT_RUN
+-          ${CMAKE_CURRENT_BINARY_DIR}
+-          ${CMAKE_CURRENT_SOURCE_DIR}/configure/test_db_client.cpp
+-          COMPILE_DEFINITIONS "-I ${MYSQL_INCLUDE_DIR}"
+-          LINK_LIBRARIES "${MYSQL_LIBRARY}"
+-          COMPILE_OUTPUT_VARIABLE DB_CLIENT_COMPILE_OUTPUT
+-          RUN_OUTPUT_VARIABLE DB_CLIENT_VERSION)
++find_library(MySQL_LIBRARY_RELEASE
++    NAMES ${_mysql_release_names}
++    NAMES_PER_DIR
++    PATHS
++        ""
++        ${_mysql_lib_paths}
++        ${_MySQL_PKG_LIBRARY_DIRS}
++    )
+ 
+-  set(msg "Check if we can compile a simple database client program: ${DB_CLIENT_COMPILE}")
++find_library(MySQL_LIBRARY_DEBUG
++    NAMES ${_mysql_debug_names}
++    NAMES_PER_DIR
++    PATHS
++        ""
++        ${_mysql_lib_paths}
++        ${_MySQL_PKG_LIBRARY_DIRS}
++    )
+ 
+-  if(NOT DB_CLIENT_COMPILE)
+-    message(STATUS ${msg})
+-  else()
+-    message(FATAL_ERROR ${msg} "\n\nBuild output:\n" ${DB_CLIENT_COMPILE_OUTPUT})
+-  endif()
++unset(_mysql_lib_paths)
++unset(_mysql_release_names)
++unset(_mysql_debug_names)
+ 
+-  string(STRIP ${DB_CLIENT_VERSION} DB_CLIENT_VERSION)
+-  set(TDB_DB_CLIENT_VERSION ${DB_CLIENT_VERSION} CACHE INTERNAL "database client version")
++include(SelectLibraryConfigurations)
++select_library_configurations(MySQL)
+ 
+-  message("Output: ${TDB_DB_CLIENT_VERSION}")
++if (WIN32)
++    set(_mysql_bin_paths
++        "$ENV{ProgramFiles}/MySQL/*/bin"
++        "$ENV{ProgramFiles\(x86\)}/MySQL/*/bin"
++        "$ENV{ProgramFiles}/MariaDB/*/bin"
++        "$ENV{ProgramFiles\(x86\)}/MariaDB/*/bin"
++        "$ENV{ProgramFiles}/MariaDB/bin"
++        "$ENV{ProgramFiles\(x86\)}/MariaDB/bin"
++        )
+ endif()
+ 
+-# handle the QUIETLY and REQUIRED arguments and set MYSQL_FOUND to TRUE if
+-# all listed variables are TRUE
+-include( FindPackageHandleStandardArgs )
++find_program(MySQL_EXECUTABLE
++    NAMES mariadb mysql
++    NAMES_PER_DIR
++    PATHS
++        ${_mysql_bin_paths}
++    )
+ 
+-find_package_handle_standard_args( MYSQL DEFAULT_MSG MYSQL_LIBRARY MYSQL_INCLUDE_DIR)
++if (MySQL_EXECUTABLE)
++    set(MySQL_exe_FOUND TRUE)
++endif()
++
++if (NOT MySQL_INCLUDE_DIR OR
++    (CMAKE_CROSSCOMPILING AND NOT CMAKE_CROSSCOMPILING_EMULATOR))
++    set(MySQL_VERSION MySQL_VERSION-NOTFOUND)
++endif()
++
++if(NOT DEFINED MySQL_VERSION)
++    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/mysql_test_db_client.cpp [===[
++#include <mysql.h>
++#include <stdio.h>
++
++int main(int argc, char** argv)
++{
++  printf("%s\n", mysql_get_client_info());
+ 
+-set( MYSQL_INCLUDE_DIRS ${MYSQL_INCLUDE_DIR} )
+-set( MYSQL_LIBRARIES ${MYSQL_LIBRARY} )
++  return 0;
++}
++]===])
++
++    try_run(
++        DB_CLIENT_RUN
++        DB_CLIENT_COMPILE
++        ${CMAKE_CURRENT_BINARY_DIR}
++        ${CMAKE_CURRENT_BINARY_DIR}/mysql_test_db_client.cpp
++        COMPILE_DEFINITIONS "-I \"${MySQL_INCLUDE_DIR}\""
++        LINK_LIBRARIES "${MySQL_LIBRARY}"
++        COMPILE_OUTPUT_VARIABLE DB_CLIENT_COMPILE_OUTPUT
++        RUN_OUTPUT_VARIABLE DB_CLIENT_VERSION)
++
++    if (NOT DB_CLIENT_COMPILE)
++      message(FATAL_ERROR "Failed to compile simple database client program:\n${DB_CLIENT_COMPILE_OUTPUT}")
++    endif()
++
++    if (NOT DB_CLIENT_RUN EQUAL 0)
++      message(FATAL_ERROR "Failed to run simple database client program:\n${DB_CLIENT_VERSION}")
++    endif()
++
++    string(STRIP "${DB_CLIENT_VERSION}" DB_CLIENT_VERSION)
++    set(MySQL_VERSION ${DB_CLIENT_VERSION} CACHE INTERNAL "database client library version")
++endif()
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(MySQL
++    FOUND_VAR MySQL_FOUND
++    REQUIRED_VARS
++        MySQL_LIBRARY
++        MySQL_INCLUDE_DIR
++    VERSION_VAR MySQL_VERSION
++    HANDLE_COMPONENTS)
++
++if (MySQL_FOUND)
++    mark_as_advanced(MySQL_INCLUDE_DIR)
++    mark_as_advanced(MySQL_LIBRARY_RELEASE)
++    mark_as_advanced(MySQL_LIBRARY_DEBUG)
++    mark_as_advanced(MySQL_LIBRARY)
++endif()
++
++if (MySQL_FOUND)
++    if (NOT TARGET MySQL::MySQL)
++        add_library(MySQL::MySQL UNKNOWN IMPORTED)
++    endif()
++    if (MySQL_LIBRARY_RELEASE)
++        set_property(TARGET MySQL::MySQL APPEND PROPERTY
++            IMPORTED_CONFIGURATIONS RELEASE
++        )
++        set_target_properties(MySQL::MySQL PROPERTIES
++            IMPORTED_LOCATION_RELEASE "${MySQL_LIBRARY_RELEASE}"
++        )
++    endif()
++    if (MySQL_LIBRARY_DEBUG)
++        set_property(TARGET MySQL::MySQL APPEND PROPERTY
++            IMPORTED_CONFIGURATIONS DEBUG
++        )
++        set_target_properties(MySQL::MySQL PROPERTIES
++            IMPORTED_LOCATION_DEBUG "${MySQL_LIBRARY_DEBUG}"
++        )
++    endif()
++    set_target_properties(MySQL::MySQL PROPERTIES
++        INTERFACE_INCLUDE_DIRECTORIES "${MySQL_INCLUDE_DIR}"
++        INTERFACE_DEFINITIONS "${_MySQL_PKG_CFLAGS_OTHER}"
++        )
++endif()
++
++if (MySQL_exe_FOUND)
++    mark_as_advanced(MySQL_EXECUTABLE)
++endif()
++
++if (MySQL_exe_FOUND AND NOT TARGET MySQL::exe)
++    add_executable(MySQL::exe IMPORTED)
++    set_property(TARGET MySQL::exe PROPERTY IMPORTED_LOCATION "${MySQL_EXECUTABLE}")
++endif()
+ 
+-mark_as_advanced( MYSQL_INCLUDE_DIR MYSQL_LIBRARY )
