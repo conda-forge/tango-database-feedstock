@@ -8,8 +8,6 @@ package:
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/releases/Database-Release-{{ version }}/downloads/TangoDatabase-with-submodules-Database-Release-{{ version }}.tar.gz
   sha256: c36acdb7f80d108ff9a5320d879d7e17487d98188c6d3090f0d06e999d22ce98
-  patches:
-    - find-zeromq-win.patch  # [win]
 
 build:
   number: 0
