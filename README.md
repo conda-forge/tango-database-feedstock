@@ -166,13 +166,6 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_cpptango9.3</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12892&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tango-database-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cpptango9.3" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>win_64_cpptango9.4</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12892&branchName=main">
