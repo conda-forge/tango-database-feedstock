@@ -10,9 +10,10 @@ source:
   sha256: beb0c79f9db361e5c49ae30f2601e27eb79b89500c088e29dc2328de88bd2c3d
   patches:
     - find-mysql.patch
+    - cxx-standard-17.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
