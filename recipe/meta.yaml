@@ -13,7 +13,7 @@ source:
     - cxx-standard-17.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
 
 requirements:
@@ -26,7 +26,7 @@ requirements:
   host:
     - cppzmq
     - cpptango
-    - mysql-devel
+    - mysql-devel <9
     - omniorb-libs
 
 test:
