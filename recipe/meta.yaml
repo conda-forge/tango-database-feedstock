@@ -10,7 +10,7 @@ source:
   sha256: c36acdb7f80d108ff9a5320d879d7e17487d98188c6d3090f0d06e999d22ce98
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -22,7 +22,9 @@ requirements:
   host:
     - cppzmq
     - cpptango
-    - mysql-devel
+    # mysql_native_password authentication plugin not available in mysql 9
+    # could be added: see https://github.com/conda-forge/mysql-feedstock/issues/106
+    - mysql-devel <9
     - omniorb-libs
 
 test:
