@@ -10,7 +10,7 @@ source:
   sha256: c36acdb7f80d108ff9a5320d879d7e17487d98188c6d3090f0d06e999d22ce98
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -22,10 +22,12 @@ requirements:
   host:
     - cppzmq
     - cpptango
-    # mysql_native_password authentication plugin not available in mysql 9
-    # could be added: see https://github.com/conda-forge/mysql-feedstock/issues/106
-    - mysql-devel <9
+    - mysql-devel
     - omniorb-libs
+  run:
+    # "lib/plugin/mysql_native_password.so" is part of mysql-client
+    # it's required to connect to mariadb
+    - mysql-client
 
 test:
   commands:
