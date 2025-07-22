@@ -18,12 +18,12 @@ build:
 requirements:
   build:
     - cmake
-    - if: unix
-      then: make
     - ${{ compiler('cxx') }}
     - ${{ stdlib("c") }}
     - if: unix
-      then: pkg-config
+      then:
+        - make
+        - pkg-config
   host:
     - cppzmq
     - cpptango
@@ -37,15 +37,14 @@ requirements:
 tests:
   - script:
       - if: unix
-        then: Databaseds --help 2>&1 | grep usage
-      - if: unix
-        then: test -f $PREFIX/share/tango/db/create_db.sql
-      - if: unix
-        then: test -f $PREFIX/share/tango/db/create_db_tables.sql
-      - if: unix
-        then: test -f $PREFIX/share/tango/db/stored_proc.sql
+        then:
+          # Databaseds --help returns 255, so grep the stderr for test
+          - Databaseds --help 2>&1 | grep -i usage
+          - test -f $PREFIX/share/tango/db/create_db.sql
+          - test -f $PREFIX/share/tango/db/create_db_tables.sql
+          - test -f $PREFIX/share/tango/db/stored_proc.sql
       - if: win
-        then: Databaseds.exe --help 2>&1 | findstr usage
+        then: Databaseds.exe --help 2>&1 | findstr /i usage
 
 about:
   license: GPL-3.0-or-later
