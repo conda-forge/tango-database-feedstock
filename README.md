@@ -3,7 +3,7 @@ About tango-database-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/tango-database-feedstock/blob/main/LICENSE.txt)
 
-Home: https://www.tango-controls.org
+Home: https://www.tango-controls.org/
 
 Package license: GPL-3.0-or-later
 
@@ -13,7 +13,6 @@ Development: https://gitlab.com/tango-controls/TangoDatabase
 
 This is the Tango Database server.
 Tango-Controls is a software toolkit for building control systems.
-
 
 Current build status
 ====================
