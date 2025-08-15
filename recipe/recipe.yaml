@@ -13,7 +13,7 @@ source:
   sha256: 155dea28e43bdbbd998e29c0a3d66c8671a8f7618a933d030a09673e3cc8127c
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -36,15 +36,14 @@ requirements:
 
 tests:
   - script:
-      - if: unix
-        then:
+      - if: win
+        then: Databaseds.exe --help 2>&1 | findstr /i usage
+        else:
           # Databaseds --help returns 255, so grep the stderr for test
           - Databaseds --help 2>&1 | grep -i usage
           - test -f $PREFIX/share/tango/db/create_db.sql
           - test -f $PREFIX/share/tango/db/create_db_tables.sql
           - test -f $PREFIX/share/tango/db/stored_proc.sql
-      - if: win
-        then: Databaseds.exe --help 2>&1 | findstr /i usage
 
 about:
   license: GPL-3.0-or-later
