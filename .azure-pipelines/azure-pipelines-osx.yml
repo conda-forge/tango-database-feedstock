@@ -11,6 +11,9 @@ jobs:
       osx_64_cpptango10.0:
         CONFIG: osx_64_cpptango10.0
         UPLOAD_PACKAGES: 'True'
+      osx_64_cpptango10.1:
+        CONFIG: osx_64_cpptango10.1
+        UPLOAD_PACKAGES: 'True'
       osx_64_cpptango9.4:
         CONFIG: osx_64_cpptango9.4
         UPLOAD_PACKAGES: 'True'
@@ -19,6 +22,9 @@ jobs:
         UPLOAD_PACKAGES: 'True'
       osx_arm64_cpptango10.0:
         CONFIG: osx_arm64_cpptango10.0
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_cpptango10.1:
+        CONFIG: osx_arm64_cpptango10.1
         UPLOAD_PACKAGES: 'True'
       osx_arm64_cpptango9.4:
         CONFIG: osx_arm64_cpptango9.4

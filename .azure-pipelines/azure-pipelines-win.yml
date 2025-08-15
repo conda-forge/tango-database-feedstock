@@ -11,6 +11,9 @@ jobs:
       win_64_cpptango10.0:
         CONFIG: win_64_cpptango10.0
         UPLOAD_PACKAGES: 'True'
+      win_64_cpptango10.1:
+        CONFIG: win_64_cpptango10.1
+        UPLOAD_PACKAGES: 'True'
       win_64_cpptango9.4:
         CONFIG: win_64_cpptango9.4
         UPLOAD_PACKAGES: 'True'
