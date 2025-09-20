@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: tango-database
-  version: 5.24
+  version: "5.25"
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/releases/Database-Release-${{ version }}/downloads/TangoDatabase-with-submodules-Database-Release-${{ version }}.tar.gz
-  sha256: 155dea28e43bdbbd998e29c0a3d66c8671a8f7618a933d030a09673e3cc8127c
+  sha256: 92c7f0dc40755200185d4bd34d467f916c22acf08045872e6e3dd6044b4dc7c6
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
