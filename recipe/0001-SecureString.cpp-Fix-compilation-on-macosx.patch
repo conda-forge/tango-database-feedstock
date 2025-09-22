@@ -1,0 +1,77 @@
+From 2f63ba2decb5658237d798e69abb04d36685e699 Mon Sep 17 00:00:00 2001
+From: Thomas Braun <thomas.braun@byte-physics.de>
+Date: Sun, 21 Sep 2025 15:52:45 +0200
+Subject: [PATCH 1/2] SecureString.cpp: Reorder header includes
+
+This ensures that we don't include anything else before handling the ifdef magic for
+our clear memory functions.
+---
+ SecureString.cpp | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/SecureString.cpp b/SecureString.cpp
+index ac548a5..d23d421 100644
+--- a/SecureString.cpp
++++ b/SecureString.cpp
+@@ -1,15 +1,14 @@
+-#include "SecureString.h"
+-
+ #include <cmake_config.h>
+ 
+-#include <algorithm>
+-
+-#include <string.h>
+ 
+ #if defined(TANGO_SECURE_ZERO_MEMORY)
+   #include <windows.h>
+ #endif
+ 
++#include "SecureString.h"
++
++#include <algorithm>
++
+ namespace
+ {
+ void safe_clear(void *ptr, size_t len)
+-- 
+2.39.5 (Apple Git-154)
+
+
+From 74b75c3a41a498e0a1b4400965af339086693f29 Mon Sep 17 00:00:00 2001
+From: Thomas Braun <thomas.braun@byte-physics.de>
+Date: Sun, 21 Sep 2025 15:56:07 +0200
+Subject: [PATCH 2/2] SecureString.cpp: Fix compilation on macosx
+
+We need to define __STDC_WANT_LIB_EXT1__ to 1 before including the string header.
+In addition the call did not match the signature.
+---
+ SecureString.cpp | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/SecureString.cpp b/SecureString.cpp
+index d23d421..536a328 100644
+--- a/SecureString.cpp
++++ b/SecureString.cpp
+@@ -1,5 +1,10 @@
+ #include <cmake_config.h>
+ 
++#if defined(TANGO_MEMSET_S)
++  #define __STDC_WANT_LIB_EXT1__ 1
++#endif
++
++#include <cstring>
+ 
+ #if defined(TANGO_SECURE_ZERO_MEMORY)
+   #include <windows.h>
+@@ -18,7 +23,7 @@ void safe_clear(void *ptr, size_t len)
+ #elif defined(TANGO_SECURE_ZERO_MEMORY)
+     SecureZeroMemory(ptr, len);
+ #elif defined(TANGO_MEMSET_S)
+-    memset_s(ptr, len);
++    memset_s(ptr, len, 0, len);
+ #elif defined(TANGO_BZERO)
+     bzero(ptr, len);
+ #else
+-- 
+2.39.5 (Apple Git-154)
+
