@@ -11,8 +11,6 @@ package:
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/releases/Database-Release-${{ version }}/downloads/TangoDatabase-with-submodules-Database-Release-${{ version }}.tar.gz
   sha256: 3b3f99d4cbe1fe0eb3e86deb1a5d0f988968433e67f754658368ed2e4667cbd8
-  patches:
-    - 0001-SecureString.cpp-Fix-compilation-on-macosx.patch
 
 build:
   number: 0
