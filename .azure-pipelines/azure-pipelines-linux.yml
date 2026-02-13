@@ -16,6 +16,10 @@ jobs:
         CONFIG: linux_64_cpptango10.1
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_64_cpptango10.3:
+        CONFIG: linux_64_cpptango10.3
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_64_cpptango9.3:
         CONFIG: linux_64_cpptango9.3
         UPLOAD_PACKAGES: 'True'
@@ -36,6 +40,10 @@ jobs:
         CONFIG: linux_aarch64_cpptango10.1
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_aarch64_cpptango10.3:
+        CONFIG: linux_aarch64_cpptango10.3
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_aarch64_cpptango9.3:
         CONFIG: linux_aarch64_cpptango9.3
         UPLOAD_PACKAGES: 'True'
@@ -54,6 +62,10 @@ jobs:
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_ppc64le_cpptango10.1:
         CONFIG: linux_ppc64le_cpptango10.1
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+      linux_ppc64le_cpptango10.3:
+        CONFIG: linux_ppc64le_cpptango10.3
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_ppc64le_cpptango9.3:

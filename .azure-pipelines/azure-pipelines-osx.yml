@@ -5,33 +5,49 @@
 jobs:
 - job: osx
   pool:
-    vmImage: macOS-15
+    vmImage: $(VMIMAGE)
   strategy:
     matrix:
       osx_64_cpptango10.0:
         CONFIG: osx_64_cpptango10.0
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
       osx_64_cpptango10.1:
         CONFIG: osx_64_cpptango10.1
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+      osx_64_cpptango10.3:
+        CONFIG: osx_64_cpptango10.3
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
       osx_64_cpptango9.4:
         CONFIG: osx_64_cpptango9.4
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
       osx_64_cpptango9.5:
         CONFIG: osx_64_cpptango9.5
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
       osx_arm64_cpptango10.0:
         CONFIG: osx_arm64_cpptango10.0
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
       osx_arm64_cpptango10.1:
         CONFIG: osx_arm64_cpptango10.1
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+      osx_arm64_cpptango10.3:
+        CONFIG: osx_arm64_cpptango10.3
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
       osx_arm64_cpptango9.4:
         CONFIG: osx_arm64_cpptango9.4
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
       osx_arm64_cpptango9.5:
         CONFIG: osx_arm64_cpptango9.5
         UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
   timeoutInMinutes: 360
   variables: {}
 
