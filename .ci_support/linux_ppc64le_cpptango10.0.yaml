@@ -15,6 +15,6 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 mysql_devel:
-- '9.5'
+- '9.6'
 target_platform:
 - linux-ppc64le
