@@ -12,26 +12,32 @@ jobs:
         CONFIG: osx_64_cpptango10.0
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        store_build_artifacts: false
       osx_64_cpptango10.1:
         CONFIG: osx_64_cpptango10.1
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        store_build_artifacts: false
       osx_64_cpptango10.3:
         CONFIG: osx_64_cpptango10.3
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        store_build_artifacts: false
       osx_arm64_cpptango10.0:
         CONFIG: osx_arm64_cpptango10.0
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: false
       osx_arm64_cpptango10.1:
         CONFIG: osx_arm64_cpptango10.1
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: false
       osx_arm64_cpptango10.3:
         CONFIG: osx_arm64_cpptango10.3
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
+        store_build_artifacts: false
   timeoutInMinutes: 360
   variables: {}
 
