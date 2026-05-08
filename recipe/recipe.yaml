@@ -1,11 +1,10 @@
 schema_version: 1
 
 context:
-  name: tango-database
   version: "5.29"
 
-package:
-  name: ${{ name|lower }}
+recipe:
+  name: tango-database-split
   version: ${{ version }}
 
 source:
@@ -13,37 +12,87 @@ source:
   sha256: 5f76d7e96319f73c4f9b7dea616a879f2c7589efb60f88dedc83616c294f186b
 
 build:
-  number: 0
+  number: 1
 
-requirements:
-  build:
-    - cmake
-    - ${{ compiler('cxx') }}
-    - ${{ stdlib("c") }}
-    - if: unix
-      then:
-        - make
-        - pkg-config
-  host:
-    - cppzmq
-    - cpptango
-    - mysql-devel
-    - omniorb-libs
-  run:
-    # "lib/plugin/mysql_native_password.so" is part of mysql-client
-    # it's required to connect to mariadb
-    - mysql-client
+outputs:
+  - staging:
+      name: tango-database-build
+    requirements:
+      build:
+        - cmake
+        - ninja
+        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - if: unix
+          then:
+            - pkg-config
+      host:
+        - cppzmq
+        - cpptango
+        - mysql-devel
+        - omniorb-libs
+    build:
+      script:
+        file: build
 
-tests:
-  - script:
-      - if: win
-        then: Databaseds.exe --help 2>&1 | findstr /i usage
-        else:
-          # Databaseds --help returns 255, so grep the stderr for test
-          - Databaseds --help 2>&1 | grep -i usage
-          - test -f $PREFIX/share/tango/db/create_db.sql
-          - test -f $PREFIX/share/tango/db/create_db_tables.sql
-          - test -f $PREFIX/share/tango/db/stored_proc.sql
+  - package:
+      name: tango-database
+    inherit: tango-database-build
+    build:
+      files:
+        - if: unix
+          then:
+            - bin/Databaseds
+            - share/tango/db/**
+          else:
+            - Library/bin/Databaseds.exe
+            - Library/share/tango/db/**
+    requirements:
+      run:
+        # "lib/plugin/mysql_native_password.so" is part of mysql-client
+        # it's required to connect to mariadb
+        - mysql-client
+    tests:
+      - script:
+          - if: unix
+            then:
+              # Databaseds --help returns 255, so grep the stderr for test
+              - Databaseds --help 2>&1 | grep -i usage
+            else:
+              - Databaseds.exe --help 2>&1 | findstr /i usage
+      - package_contents:
+          files:
+            - if: unix
+              then:
+                - share/tango/db/create_db.sql
+                - share/tango/db/create_db_tables.sql
+                - share/tango/db/stored_proc.sql
+              else:
+                - Library/share/tango/db/create_db.sql
+                - Library/share/tango/db/create_db_tables.sql
+                - Library/share/tango/db/stored_proc.sql
+
+  - package:
+      name: tango-database-dbg
+    inherit:
+      from: tango-database-build
+      run_exports: false
+    build:
+      skip:
+        - not linux
+      dynamic_linking:
+        # Prevent dbg file to be modified
+        # Will raise CRC mismatch otherwise!
+        binary_relocation: false
+      files:
+        - lib/debug/Databaseds.dbg
+    requirements:
+      run:
+        - ${{ pin_subpackage('tango-database', exact=True) }}
+    tests:
+      - package_contents:
+          files:
+            - lib/debug/Databaseds.dbg
 
 about:
   license: GPL-3.0-or-later
@@ -56,6 +105,7 @@ about:
   repository: https://gitlab.com/tango-controls/TangoDatabase
 
 extra:
+  feedstock-name: tango-database
   recipe-maintainers:
     - beenje
     - bourtemb
