@@ -6,13 +6,23 @@ else
   ADDITIONAL_ARGS=""
 fi
 
-mkdir build
-cd build
 cmake ${CMAKE_ARGS} \
-      -DCMAKE_BUILD_TYPE=Release \
+      -G Ninja \
+      -DCMAKE_BUILD_TYPE=RelWithDebInfo \
       -DCMAKE_VERBOSE_MAKEFILE=true \
       -DCMAKE_INSTALL_PREFIX=$PREFIX \
-      ${ADDITIONAL_ARGS} ..
+      ${ADDITIONAL_ARGS} \
+      -S . \
+      -B build
 
-make -j $CPU_COUNT
-make install
+cmake --build build
+cmake --install build
+
+if [ -n "${OBJCOPY}" ]
+then
+  mkdir -p ${PREFIX}/lib/debug
+  ${OBJCOPY} --only-keep-debug ${PREFIX}/bin/Databaseds ${PREFIX}/lib/debug/Databaseds.dbg
+  chmod 664 ${PREFIX}/lib/debug/Databaseds.dbg
+  ${OBJCOPY} --strip-debug ${PREFIX}/bin/Databaseds
+  ${OBJCOPY} --add-gnu-debuglink=${PREFIX}/lib/debug/Databaseds.dbg ${PREFIX}/bin/Databaseds
+fi
