@@ -80,27 +80,6 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tango-database-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_cpptango10.3" alt="variant">
                 </a>
               </td>
-            </tr><tr>
-              <td>win_64_cpptango10.0</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12892&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tango-database-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cpptango10.0" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_cpptango10.1</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12892&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tango-database-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cpptango10.1" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_cpptango10.3</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=12892&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tango-database-feedstock?branchName=main&jobName=win&configuration=win%20win_64_cpptango10.3" alt="variant">
-                </a>
-              </td>
             </tr>
           </tbody>
         </table>
@@ -127,31 +106,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `tango-database, tango-database-dbg` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install tango-database tango-database-dbg
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install tango-database tango-database-dbg
 ```
 
-It is possible to list all of the versions of `tango-database` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add tango-database tango-database-dbg
+# for installing globally
+pixi global install tango-database tango-database-dbg
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `tango-database` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search tango-database --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search tango-database --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search tango-database --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -163,6 +184,8 @@ mamba repoquery whoneeds tango-database --channel conda-forge
 # List dependencies of `tango-database`:
 mamba repoquery depends tango-database --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge

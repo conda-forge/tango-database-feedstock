@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "5.30"
+  version: "5.31"
 
 recipe:
   name: tango-database-split
@@ -9,7 +9,7 @@ recipe:
 
 source:
   url: https://gitlab.com/tango-controls/TangoDatabase/-/releases/Database-Release-${{ version }}/downloads/TangoDatabase-with-submodules-Database-Release-${{ version }}.tar.gz
-  sha256: d0b1fdcf100620e7981a9defbcc25c094fac94ca822ac8a09117bf01ee8a4b81
+  sha256: 442cd3f78f2b00ae841ddf8c4b77a2845d2d61e540548416f02261c97b443b0e
 
 build:
   number: 0
