@@ -38,24 +38,6 @@ description = "List contents of all packages found in rattler-build build direct
 [feature.build.tasks.build]
 cmd = "rattler-build build --recipe recipe"
 description = "Build tango-database-feedstock directly (without setup scripts), no particular variant specified"
-[feature.build.tasks."build-linux_64_cpptango10.0"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_cpptango10.0.yaml --target-platform linux-64"
-description = "Build tango-database-feedstock with variant linux_64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."debug-linux_64_cpptango10.0"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_cpptango10.0.yaml --target-platform linux-64"
-description = "Debug tango-database-feedstock with variant linux_64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."inspect-linux_64_cpptango10.0"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_cpptango10.0.yaml"
-description = "List contents of tango-database-feedstock packages built for variant linux_64_cpptango10.0"
-[feature.build.tasks."build-linux_64_cpptango10.1"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_cpptango10.1.yaml --target-platform linux-64"
-description = "Build tango-database-feedstock with variant linux_64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."debug-linux_64_cpptango10.1"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_64_cpptango10.1.yaml --target-platform linux-64"
-description = "Debug tango-database-feedstock with variant linux_64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."inspect-linux_64_cpptango10.1"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_cpptango10.1.yaml"
-description = "List contents of tango-database-feedstock packages built for variant linux_64_cpptango10.1"
 [feature.build.tasks."build-linux_64_cpptango10.3"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_64_cpptango10.3.yaml --target-platform linux-64"
 description = "Build tango-database-feedstock with variant linux_64_cpptango10.3 directly (without setup scripts)"
@@ -74,24 +56,6 @@ description = "Debug tango-database-feedstock with variant linux_64_cpptango9.3 
 [feature.build.tasks."inspect-linux_64_cpptango9.3"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_64_cpptango9.3.yaml"
 description = "List contents of tango-database-feedstock packages built for variant linux_64_cpptango9.3"
-[feature.build.tasks."build-linux_aarch64_cpptango10.0"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cpptango10.0.yaml --target-platform linux-aarch64"
-description = "Build tango-database-feedstock with variant linux_aarch64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."debug-linux_aarch64_cpptango10.0"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_aarch64_cpptango10.0.yaml --target-platform linux-aarch64"
-description = "Debug tango-database-feedstock with variant linux_aarch64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."inspect-linux_aarch64_cpptango10.0"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cpptango10.0.yaml"
-description = "List contents of tango-database-feedstock packages built for variant linux_aarch64_cpptango10.0"
-[feature.build.tasks."build-linux_aarch64_cpptango10.1"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cpptango10.1.yaml --target-platform linux-aarch64"
-description = "Build tango-database-feedstock with variant linux_aarch64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."debug-linux_aarch64_cpptango10.1"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_aarch64_cpptango10.1.yaml --target-platform linux-aarch64"
-description = "Debug tango-database-feedstock with variant linux_aarch64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."inspect-linux_aarch64_cpptango10.1"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cpptango10.1.yaml"
-description = "List contents of tango-database-feedstock packages built for variant linux_aarch64_cpptango10.1"
 [feature.build.tasks."build-linux_aarch64_cpptango10.3"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/linux_aarch64_cpptango10.3.yaml --target-platform linux-aarch64"
 description = "Build tango-database-feedstock with variant linux_aarch64_cpptango10.3 directly (without setup scripts)"
@@ -110,87 +74,33 @@ description = "Debug tango-database-feedstock with variant linux_aarch64_cpptang
 [feature.build.tasks."inspect-linux_aarch64_cpptango9.3"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_aarch64_cpptango9.3.yaml"
 description = "List contents of tango-database-feedstock packages built for variant linux_aarch64_cpptango9.3"
-[feature.build.tasks."build-osx_64_cpptango10.0"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_cpptango10.0.yaml --target-platform osx-64"
-description = "Build tango-database-feedstock with variant osx_64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."debug-osx_64_cpptango10.0"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_64_cpptango10.0.yaml --target-platform osx-64"
-description = "Debug tango-database-feedstock with variant osx_64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."inspect-osx_64_cpptango10.0"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_cpptango10.0.yaml"
-description = "List contents of tango-database-feedstock packages built for variant osx_64_cpptango10.0"
-[feature.build.tasks."build-osx_64_cpptango10.1"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_cpptango10.1.yaml --target-platform osx-64"
-description = "Build tango-database-feedstock with variant osx_64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."debug-osx_64_cpptango10.1"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_64_cpptango10.1.yaml --target-platform osx-64"
-description = "Debug tango-database-feedstock with variant osx_64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."inspect-osx_64_cpptango10.1"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_cpptango10.1.yaml"
-description = "List contents of tango-database-feedstock packages built for variant osx_64_cpptango10.1"
-[feature.build.tasks."build-osx_64_cpptango10.3"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_cpptango10.3.yaml --target-platform osx-64"
-description = "Build tango-database-feedstock with variant osx_64_cpptango10.3 directly (without setup scripts)"
-[feature.build.tasks."debug-osx_64_cpptango10.3"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_64_cpptango10.3.yaml --target-platform osx-64"
-description = "Debug tango-database-feedstock with variant osx_64_cpptango10.3 directly (without setup scripts)"
-[feature.build.tasks."inspect-osx_64_cpptango10.3"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_cpptango10.3.yaml"
-description = "List contents of tango-database-feedstock packages built for variant osx_64_cpptango10.3"
-[feature.build.tasks."build-osx_arm64_cpptango10.0"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_cpptango10.0.yaml --target-platform osx-arm64"
-description = "Build tango-database-feedstock with variant osx_arm64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."debug-osx_arm64_cpptango10.0"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_arm64_cpptango10.0.yaml --target-platform osx-arm64"
-description = "Debug tango-database-feedstock with variant osx_arm64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."inspect-osx_arm64_cpptango10.0"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_cpptango10.0.yaml"
-description = "List contents of tango-database-feedstock packages built for variant osx_arm64_cpptango10.0"
-[feature.build.tasks."build-osx_arm64_cpptango10.1"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_cpptango10.1.yaml --target-platform osx-arm64"
-description = "Build tango-database-feedstock with variant osx_arm64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."debug-osx_arm64_cpptango10.1"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_arm64_cpptango10.1.yaml --target-platform osx-arm64"
-description = "Debug tango-database-feedstock with variant osx_arm64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."inspect-osx_arm64_cpptango10.1"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_cpptango10.1.yaml"
-description = "List contents of tango-database-feedstock packages built for variant osx_arm64_cpptango10.1"
-[feature.build.tasks."build-osx_arm64_cpptango10.3"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_cpptango10.3.yaml --target-platform osx-arm64"
-description = "Build tango-database-feedstock with variant osx_arm64_cpptango10.3 directly (without setup scripts)"
-[feature.build.tasks."debug-osx_arm64_cpptango10.3"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_arm64_cpptango10.3.yaml --target-platform osx-arm64"
-description = "Debug tango-database-feedstock with variant osx_arm64_cpptango10.3 directly (without setup scripts)"
-[feature.build.tasks."inspect-osx_arm64_cpptango10.3"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_cpptango10.3.yaml"
-description = "List contents of tango-database-feedstock packages built for variant osx_arm64_cpptango10.3"
-[feature.build.tasks."build-win_64_cpptango10.0"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cpptango10.0.yaml --target-platform win-64"
-description = "Build tango-database-feedstock with variant win_64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."debug-win_64_cpptango10.0"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/win_64_cpptango10.0.yaml --target-platform win-64"
-description = "Debug tango-database-feedstock with variant win_64_cpptango10.0 directly (without setup scripts)"
-[feature.build.tasks."inspect-win_64_cpptango10.0"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cpptango10.0.yaml"
-description = "List contents of tango-database-feedstock packages built for variant win_64_cpptango10.0"
-[feature.build.tasks."build-win_64_cpptango10.1"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cpptango10.1.yaml --target-platform win-64"
-description = "Build tango-database-feedstock with variant win_64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."debug-win_64_cpptango10.1"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/win_64_cpptango10.1.yaml --target-platform win-64"
-description = "Debug tango-database-feedstock with variant win_64_cpptango10.1 directly (without setup scripts)"
-[feature.build.tasks."inspect-win_64_cpptango10.1"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cpptango10.1.yaml"
-description = "List contents of tango-database-feedstock packages built for variant win_64_cpptango10.1"
-[feature.build.tasks."build-win_64_cpptango10.3"]
-cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_cpptango10.3.yaml --target-platform win-64"
-description = "Build tango-database-feedstock with variant win_64_cpptango10.3 directly (without setup scripts)"
-[feature.build.tasks."debug-win_64_cpptango10.3"]
-cmd = "rattler-build debug setup --recipe recipe -m .ci_support/win_64_cpptango10.3.yaml --target-platform win-64"
-description = "Debug tango-database-feedstock with variant win_64_cpptango10.3 directly (without setup scripts)"
-[feature.build.tasks."inspect-win_64_cpptango10.3"]
-cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_cpptango10.3.yaml"
-description = "List contents of tango-database-feedstock packages built for variant win_64_cpptango10.3"
+[feature.build.tasks."build-osx_64_"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_.yaml --target-platform osx-64"
+description = "Build tango-database-feedstock with variant osx_64_ directly (without setup scripts)"
+[feature.build.tasks."debug-osx_64_"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_64_.yaml --target-platform osx-64"
+description = "Debug tango-database-feedstock with variant osx_64_ directly (without setup scripts)"
+[feature.build.tasks."inspect-osx_64_"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_.yaml"
+description = "List contents of tango-database-feedstock packages built for variant osx_64_"
+[feature.build.tasks."build-osx_arm64_"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_arm64_.yaml --target-platform osx-arm64"
+description = "Build tango-database-feedstock with variant osx_arm64_ directly (without setup scripts)"
+[feature.build.tasks."debug-osx_arm64_"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/osx_arm64_.yaml --target-platform osx-arm64"
+description = "Debug tango-database-feedstock with variant osx_arm64_ directly (without setup scripts)"
+[feature.build.tasks."inspect-osx_arm64_"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_arm64_.yaml"
+description = "List contents of tango-database-feedstock packages built for variant osx_arm64_"
+[feature.build.tasks."build-win_64_"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/win_64_.yaml --target-platform win-64"
+description = "Build tango-database-feedstock with variant win_64_ directly (without setup scripts)"
+[feature.build.tasks."debug-win_64_"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/win_64_.yaml --target-platform win-64"
+description = "Debug tango-database-feedstock with variant win_64_ directly (without setup scripts)"
+[feature.build.tasks."inspect-win_64_"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/win_64_.yaml"
+description = "List contents of tango-database-feedstock packages built for variant win_64_"
 
 [environments]
 build = ["build"]
