@@ -7,7 +7,9 @@ channel_targets:
 cpptango:
 - '10.0'
 cxx_compiler:
-- vs2022
+- vs
+cxx_compiler_version:
+- '2022'
 mysql_devel:
 - '9.7'
 target_platform:
