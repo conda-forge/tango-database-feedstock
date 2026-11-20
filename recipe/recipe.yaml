@@ -25,7 +25,7 @@ outputs:
         - ${{ stdlib("c") }}
         - if: unix
           then:
-            - pkg-config
+            - pkgconf
       host:
         - cppzmq
         - cpptango
